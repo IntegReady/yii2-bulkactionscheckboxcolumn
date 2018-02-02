@@ -10,7 +10,6 @@ use yii\web\View;
 
 class ButtonDropdown extends Widget
 {
-
     /**
      * @var string
      */
@@ -96,7 +95,6 @@ class ButtonDropdown extends Widget
      */
     public function registerAssets()
     {
-
         $view = $this->getView();
         ButtonDropdownAssets::register($view);
         $options = [

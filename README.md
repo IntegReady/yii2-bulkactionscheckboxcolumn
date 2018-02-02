@@ -9,32 +9,21 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-composer require --prefer-dist integready/yii2-bulkactionscheckboxcolumn "@dev"
+composer require --prefer-dist integready/yii2-bulkactionscheckboxcolumn "~1.0"
 ```
 
 or add
 
 ```
-"integready/yii2-bulkactionscheckboxcolumn": "@dev"
+"integready/yii2-bulkactionscheckboxcolumn": "~1.0"
 ```
 
 to the require section of your `composer.json` file.
 
-Inserting a widget in GridView:
+Usage example:
 --
+###### GridView id must be set.
 
-### Included variables (`#INCLUDED`):
-###### # These are NOT variables, you do not need to write them into the code, replace them with the correct strings or your variables! They are for what would be clear where you need to write the same para- meters.
-* `$idGrid // string`
-* `$fieldFirst // string`
-* `$itemsFirst // array(1 => 'On', 0 => 'Off')`
-* `$nameActionFirst // string`
-* `$fieldNext // string`
-* `$itemsNext // array(1 => 'On', 0 => 'Off')`
-* `$nameActionNext // string`
-* `$perPageName // string`
-
-### Example:
 * index.php `(View)`:
 ```php
 <?php
@@ -43,23 +32,29 @@ use kartik\grid\GridView;
 
 ?>
 <?= GridView::widget([
-    'id' => $idGrid, #INCLUDED
-    'dataProvider'   => $dataProvider,
-    'filterModel'    => $searchModel,
-    'columns'        => [
+    'id'            => 'books-grid',
+    'dataProvider'  => $dataProvider,
+    'filterModel'   => $searchModel,
+    'columns'       => [
         [
-            'class' => 'integready\bulkactionscheckboxcolumn\BulkCheckboxColumn',
-            'elements' => [
+            'class'     => 'integready\bulkactionscheckboxcolumn\BulkCheckboxColumn',
+            'elements'  => [
                 [
-                    'label' => 'Text first button',
-                    'field' => $fieldFirst, #INCLUDED
-                    'items' => $itemsFirst, #INCLUDED
+                    'label' => 'Change Availability',
+                    'field' => 'available',
+                    'items' => [
+                        1 => 'Yes',
+                        0 => 'No',
+                    ],
                 ],
                 // ...Many elements
                 [
-                    'label' => 'Text next button',
-                    'field' => $fieldNext, #INCLUDED
-                    'items' => $itemsNext, #INCLUDED
+                    'label' => 'Change International Shipping',
+                    'field' => 'intl_shipping',
+                    'items' => [
+                        1 => 'Yes',
+                        0 => 'No',
+                    ],
                 ]
             ],
         ],
@@ -68,7 +63,7 @@ use kartik\grid\GridView;
 ]); ?>
 ```
 
-* SiteController.php `(Controller)`:
+* BookController.php `(Controller)`:
 ```php
 <?php
 
@@ -76,15 +71,14 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
-use backend\models\Site;
+use backend\models\Book;
 use yii\helpers\ArrayHelper;
-use backend\models\SiteSearch;
-use integready\bulkactionscheckboxcolumn\BulkStatusAction;
+use backend\models\BookSearch;
 
 /**
- * SiteController implements the CRUD actions for Site model.
+ * BookController implements the CRUD actions for Site model.
  */
-class SiteController extends Controller
+class BookController extends Controller
 {
     /**
      * @inheritdoc
@@ -92,18 +86,19 @@ class SiteController extends Controller
     public function actions()
     {
         return ArrayHelper::merge(parent::actions(), [
-            $nameActionFirst => [ #INCLUDED
-                'class' => BulkStatusAction::className(),
-                'modelClass' => Site::className(),
-                'gridId' => $idGrid, #INCLUDED
-                'statusField' => $fieldFirst, #INCLUDED
+            'bulk_available'        => [
+                'class'                 => BulkCheckboxAction::className(),
+                'modelClass'            => Book::className(),
+                'gridId'                => 'books-grid',
+                'statusField'           => 'available',
+                'updateType'            => BulkCheckboxAction::UPDATE_TYPE_ONEBYONE,
             ],
             // ...Many actions
-            $nameActionNext => [ #INCLUDED
-                'class' => BulkStatusAction::className(),
-                'modelClass' => Site::className(),
-                'gridId' => $idGrid, #INCLUDED
-                'statusField' => $fieldNext, #INCLUDED
+            'bulk_intl_shipping'    => [
+                'class'                 => BulkCheckboxAction::className(),
+                'modelClass'            => Book::className(),
+                'gridId'                => 'books-grid',
+                'statusField'           => 'intl_shipping',
             ],
         ]);
     }
@@ -115,11 +110,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->runAction($nameActionFirst); #INCLUDED
+        $this->runAction('bulk_available');
         // ...Many actions with run
-        $this->runAction($nameActionNext); #INCLUDED
+        $this->runAction('bulk_intl_shipping');
 
-        $searchModel  = new SiteSearch();
+        $searchModel  = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
