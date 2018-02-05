@@ -40,18 +40,19 @@ use kartik\grid\GridView;
             'class'     => 'integready\bulkactionscheckboxcolumn\BulkCheckboxColumn',
             'elements'  => [
                 [
-                    'label' => 'Change Availability',
-                    'field' => 'available',
-                    'items' => [
+                    'label'     => 'Change Availability',
+                    'field'     => 'available',
+                    'items'     => [
                         1 => 'Yes',
                         0 => 'No',
                     ],
+                    'visible'   => false,
                 ],
                 // ...Many elements
                 [
-                    'label' => 'Change International Shipping',
-                    'field' => 'intl_shipping',
-                    'items' => [
+                    'label'     => 'Change International Shipping',
+                    'field'     => 'intl_shipping',
+                    'items'     => [
                         1 => 'Yes',
                         0 => 'No',
                     ],

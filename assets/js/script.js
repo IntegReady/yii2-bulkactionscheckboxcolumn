@@ -10,10 +10,13 @@ for (key = 0; key < yiiOptions.length; ++key) {
     }
 }
 
-$(document).on('click', selectorName, function(e) {
+$(document).on('click', selectorName, function (e) {
     e.preventDefault();
-    let data = '{"status":' + $(this).data('status') + ',"ids":[' + $('#' + $(this).attr('class').replace('-ids', '')).yiiGridView('getSelectedRows').join(',') + ']}';
-    let selectorSearch = 'input[name=' + $(this).data('field') + ']';
-    $(selectorSearch).val(data);
-    $(selectorSearch).change();
+    let buttonSelector = '#parent-' + $(this).attr('class');
+    if (confirm('Are you sure you want to "' + $(buttonSelector).text() + '" to "' + $(this).text() + '" for selected items?')) {
+        let data = '{"status":' + $(this).data('status') + ',"ids":[' + $('#' + $(this).attr('class').replace('-ids', '')).yiiGridView('getSelectedRows').join(',') + ']}';
+        let selectorSearch = 'input[name=' + $(this).data('field') + ']';
+        $(selectorSearch).val(data);
+        $(selectorSearch).change();
+    }
 });

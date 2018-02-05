@@ -65,18 +65,19 @@ class ButtonDropdown extends Widget
             $items = [];
             foreach ($this->items as $key => $item) {
                 $items[] = [
-                    'label' => $item,
-                    'url' => '#',
+                    'label'       => $item,
+                    'url'         => '#',
                     'linkOptions' => [
                         'data-status' => $key,
-                        'data-field' => $this->field,
-                        'class' => $this->selectorName,
+                        'data-field'  => $this->field,
+                        'class'       => $this->selectorName,
                     ],
                 ];
             }
 
             $button = BBDropdown::widget([
-                'label' => $this->label,
+                'id'       => 'parent-' . $this->selectorName,
+                'label'    => $this->label,
                 'dropdown' => [
                     'items' => $items,
                 ],
