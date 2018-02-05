@@ -53,7 +53,6 @@ class BulkCheckboxAction extends Action
                     $model->save();
                 }
             }
-
         }
 
         if (!empty($postUrl[$this->gridId . '_' . $this->statusField])) {

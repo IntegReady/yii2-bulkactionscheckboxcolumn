@@ -31,20 +31,24 @@ class BulkCheckboxColumn extends CheckboxColumn
         if (!empty($this->elements) && count($this->elements) >= 1) {
             $comma = false;
             foreach ($this->elements as $key => $element) {
+                if (isset($element['visible']) && $element['visible'] === false) {
+                    continue;
+                }
+
                 $element['field'] = $grid->getId() . '_' . $element['field'];
                 if ($comma) {
                     $this->fieldFilterSelector .= ', input[name=\'' . $element['field'] . '\']';
                 } else {
                     $this->fieldFilterSelector .= 'input[name=\'' . $element['field'] . '\']';
-                    $comma = true;
+                    $comma                     = true;
                 }
 
                 $buttons .= ButtonDropdown::widget([
-                    'label' => $element['label'],
-                    'field' => $element['field'],
+                    'label'        => $element['label'],
+                    'field'        => $element['field'],
                     'selectorName' => $grid->id . '-ids',
-                    'gridId' => $grid->id,
-                    'items' => $element['items'],
+                    'gridId'       => $grid->id,
+                    'items'        => $element['items'],
                 ]);
             }
         }
@@ -52,7 +56,7 @@ class BulkCheckboxColumn extends CheckboxColumn
         $grid->toolbar = [
             'content' => $buttons,
             '{export}',
-            '{toggleData}'
+            '{toggleData}',
         ];
 
         if (!empty($this->fieldFilterSelector)) {
