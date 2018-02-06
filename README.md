@@ -28,6 +28,7 @@ Usage example:
 ```php
 <?php
 
+use integready\bulkactionscheckboxcolumn\BulkCheckboxColumn;
 use kartik\grid\GridView;
 
 ?>
@@ -37,26 +38,32 @@ use kartik\grid\GridView;
     'filterModel'   => $searchModel,
     'columns'       => [
         [
-            'class'     => 'integready\bulkactionscheckboxcolumn\BulkCheckboxColumn',
+            'class'     => BulkCheckboxColumn::className(),
             'elements'  => [
                 [
-                    'label'     => 'Change Availability',
-                    'field'     => 'available',
-                    'items'     => [
+                    'label'         => 'Change Availability',
+                    'field'         => 'available',
+                    'items'         => [
                         1 => 'Yes',
                         0 => 'No',
                     ],
-                    'visible'   => false,
+                    'visible'       => false,
                 ],
-                // ...Many elements
                 [
-                    'label'     => 'Change International Shipping',
-                    'field'     => 'intl_shipping',
-                    'items'     => [
+                    'label'         => 'Change International Shipping',
+                    'field'         => 'intl_shipping',
+                    'items'         => [
                         1 => 'Yes',
                         0 => 'No',
                     ],
+                ],
+                [
+                    'label'         => 'Change Author',
+                    'field'         => 'author_book',
+                    'buttonType'    => BulkCheckboxColumn::BUTTON_TYPE_CUSTOM_JS,
+                    'customJs'      => 'function(event, gridId, ids) { /* ... */ }'
                 ]
+                // ...Many elements
             ],
         ],
         // Other columns
