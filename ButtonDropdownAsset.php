@@ -5,9 +5,9 @@ namespace integready\bulkactionscheckboxcolumn;
 use yii\web\AssetBundle;
 
 /**
- * Class ButtonDropdownAssets
+ * Class ButtonDropdownAsset
  */
-class ButtonDropdownAssets extends AssetBundle
+class ButtonDropdownAsset extends AssetBundle
 {
     /**
      * @var string
@@ -23,7 +23,7 @@ class ButtonDropdownAssets extends AssetBundle
      * @var array
      */
     public $js = [
-        'js/script.js',
+        'js/buttonDropdown.js',
     ];
 
     /**

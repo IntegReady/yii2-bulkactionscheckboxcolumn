@@ -9,6 +9,9 @@ use kartik\grid\CheckboxColumn;
  */
 class BulkCheckboxColumn extends CheckboxColumn
 {
+    const BUTTON_TYPE_DROPDOWN  = 1;
+    const BUTTON_TYPE_CUSTOM_JS = 0;
+
     /**
      * @var array
      */
@@ -35,21 +38,33 @@ class BulkCheckboxColumn extends CheckboxColumn
                     continue;
                 }
 
-                $element['field'] = $grid->getId() . '_' . $element['field'];
-                if ($comma) {
-                    $this->fieldFilterSelector .= ', input[name=\'' . $element['field'] . '\']';
-                } else {
-                    $this->fieldFilterSelector .= 'input[name=\'' . $element['field'] . '\']';
-                    $comma                     = true;
-                }
+                if (!isset($element['buttonType']) || $element['buttonType'] === self::BUTTON_TYPE_DROPDOWN) {
 
-                $buttons .= ButtonDropdown::widget([
-                    'label'        => $element['label'],
-                    'field'        => $element['field'],
-                    'selectorName' => $grid->id . '-ids',
-                    'gridId'       => $grid->id,
-                    'items'        => $element['items'],
-                ]);
+                    $element['field'] = $grid->getId() . '_' . $element['field'];
+                    if ($comma) {
+                        $this->fieldFilterSelector .= ', input[name=\'' . $element['field'] . '\']';
+                    } else {
+                        $this->fieldFilterSelector .= 'input[name=\'' . $element['field'] . '\']';
+                        $comma                     = true;
+                    }
+
+                    $buttons .= ButtonDropdown::widget([
+                        'label'        => $element['label'],
+                        'field'        => $element['field'],
+                        'selectorName' => $grid->id . '-ids',
+                        'gridId'       => $grid->id,
+                        'items'        => $element['items'],
+                    ]);
+                } elseif ($element['buttonType'] === self::BUTTON_TYPE_CUSTOM_JS) {
+                    $buttons .= ButtonSingle::widget([
+                        'label'        => $element['label'],
+                        'selectorName' => $grid->id . '-ids',
+                        'gridId'       => $grid->id,
+                        'customJs'     => $element['customJs'],
+                    ]);
+                } else {
+                    continue;
+                }
             }
         }
 

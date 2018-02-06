@@ -43,11 +43,6 @@ class ButtonDropdown extends Widget
     public $items;
 
     /**
-     * @var string
-     */
-    public $float = 'left';
-
-    /**
      * @inheritdoc
      */
     public function init()
@@ -97,15 +92,15 @@ class ButtonDropdown extends Widget
     public function registerAssets()
     {
         $view = $this->getView();
-        ButtonDropdownAssets::register($view);
+        ButtonDropdownAsset::register($view);
         $options = [
             'selectorName' => $this->selectorName,
         ];
 
         $view->registerJs(
-            'if (window.yiiOptions === undefined) { yiiOptions = []; yiiOptions.push(' . Json::htmlEncode($options) . ');} else {yiiOptions.push(' . Json::htmlEncode($options) . ');}',
+            'if (window.yiiOptionsDropdown === undefined) { yiiOptionsDropdown = []; yiiOptionsDropdown.push(' . Json::htmlEncode($options) . ');} else {yiiOptionsDropdown.push(' . Json::htmlEncode($options) . ');}',
             View::POS_HEAD,
-            'yiiOptions_' . $this->gridId
+            'yiiOptionsDropdown_' . $this->gridId
         );
     }
 }
