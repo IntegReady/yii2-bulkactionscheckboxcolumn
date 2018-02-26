@@ -61,7 +61,8 @@ use kartik\grid\GridView;
                     'label'         => 'Change Author',
                     'field'         => 'author_book',
                     'buttonType'    => BulkCheckboxColumn::BUTTON_TYPE_CUSTOM_JS,
-                    'customJs'      => 'function(event, gridId, ids) { /* ... */ }'
+                    'customJs'      => 'function(event, gridId, ids) { /* ... */ }',
+                    'buttonClass'   => 'btn btn-primary',
                 ]
                 // ...Other elements
             ],
@@ -110,7 +111,7 @@ class BookController extends Controller
             ],
         ]);
     }
-    
+
     /**
      * Index page
      *
@@ -130,7 +131,7 @@ class BookController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    
+
     // Other actions and methods
 }
 ```

@@ -53,6 +53,7 @@ class BulkCheckboxColumn extends CheckboxColumn
                         'field'        => $element['field'],
                         'selectorName' => $grid->id . '-ids',
                         'gridId'       => $grid->id,
+                        'buttonClass'  => isset($element['buttonClass']) ? $element['buttonClass'] : null,
                         'items'        => $element['items'],
                     ]);
                 } elseif ($element['buttonType'] === self::BUTTON_TYPE_CUSTOM_JS) {
@@ -60,6 +61,7 @@ class BulkCheckboxColumn extends CheckboxColumn
                         'label'        => $element['label'],
                         'selectorName' => $grid->id . '-ids',
                         'gridId'       => $grid->id,
+                        'buttonClass'  => isset($element['buttonClass']) ? $element['buttonClass'] : null,
                         'customJs'     => $element['customJs'],
                     ]);
                 } else {

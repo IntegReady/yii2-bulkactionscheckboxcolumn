@@ -31,6 +31,11 @@ class ButtonDropdown extends Widget
     public $gridId = 'gridview-index';
 
     /**
+     * @var string
+     */
+    public $buttonClass = 'btn';
+
+    /**
      * Items list
      * ```
      * [
@@ -75,6 +80,9 @@ class ButtonDropdown extends Widget
                 'label'    => $this->label,
                 'dropdown' => [
                     'items' => $items,
+                ],
+                'options' => [
+                    'class' => $this->buttonClass,
                 ],
             ]);
 

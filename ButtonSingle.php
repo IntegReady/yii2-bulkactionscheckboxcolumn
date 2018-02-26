@@ -27,6 +27,11 @@ class ButtonSingle extends Widget
     /**
      * @var string
      */
+    public $buttonClass = 'btn';
+
+    /**
+     * @var string
+     */
     public $customJs;
 
     /**
@@ -45,7 +50,7 @@ class ButtonSingle extends Widget
     {
         return Html::button($this->label, [
             'id' => 'single-' . $this->selectorName,
-            'class' => 'btn',
+            'class' => $this->buttonClass,
             'data-selector' => $this->selectorName,
         ]);
     }
