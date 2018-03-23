@@ -57,7 +57,7 @@ class BulkCheckboxAction extends Action
 
         if (!empty($postUrl[$this->gridId . '_' . $this->statusField])) {
             unset($postUrl[$this->gridId . '_' . $this->statusField]);
-            $urlParams = ArrayHelper::merge(['did/index'], $postUrl);
+            $urlParams = ArrayHelper::merge(['index'], $postUrl);
             Yii::$app->response->redirect(Url::to($urlParams));
         }
     }
