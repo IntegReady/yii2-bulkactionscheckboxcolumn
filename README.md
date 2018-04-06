@@ -43,6 +43,7 @@ use kartik\grid\GridView;
                 [
                     'label'         => 'Change Availability',
                     'field'         => 'available',
+                    'buttonClass'   => 'btn btn-primary',
                     'items'         => [
                         1 => 'Yes',
                         0 => 'No',
@@ -52,6 +53,7 @@ use kartik\grid\GridView;
                 [
                     'label'         => 'Change International Shipping',
                     'field'         => 'intl_shipping',
+                    'buttonClass'   => 'btn btn-success',
                     'items'         => [
                         1 => 'Yes',
                         0 => 'No',
@@ -60,6 +62,7 @@ use kartik\grid\GridView;
                 [
                     'label'         => 'Change Author',
                     'field'         => 'author_book',
+                    'buttonClass'   => 'btn btn-info',
                     'buttonType'    => BulkCheckboxColumn::BUTTON_TYPE_CUSTOM_JS,
                     'customJs'      => 'function(event, gridId, ids) { /* ... */ }',
                     'buttonClass'   => 'btn btn-primary',
