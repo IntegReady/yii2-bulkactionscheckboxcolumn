@@ -44,6 +44,11 @@ use kartik\grid\GridView;
                     'label'         => 'Change Availability',
                     'field'         => 'available',
                     'buttonClass'   => 'btn btn-primary',
+                    'buttonOptions' => [
+                        'data' => [
+                            'button' => 'change',
+                        ],
+                    ],
                     'items'         => [
                         1 => 'Yes',
                         0 => 'No',
