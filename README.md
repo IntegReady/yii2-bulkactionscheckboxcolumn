@@ -25,6 +25,7 @@ Usage example:
 ###### GridView id must be set.
 
 * index.php `(View)`:
+> **Only one button is type to _```BulkCheckboxColumn::BUTTON_TYPE_CUSTOM_JS```_!**
 ```php
 <?php
 
