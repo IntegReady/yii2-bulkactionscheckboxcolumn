@@ -49,20 +49,22 @@ class BulkCheckboxColumn extends CheckboxColumn
                     }
 
                     $buttons .= ButtonDropdown::widget([
-                        'label'        => $element['label'],
-                        'field'        => $element['field'],
-                        'selectorName' => $grid->id . '-ids',
-                        'gridId'       => $grid->id,
-                        'buttonClass'  => isset($element['buttonClass']) ? $element['buttonClass'] : null,
-                        'items'        => $element['items'],
+                        'label'         => $element['label'],
+                        'field'         => $element['field'],
+                        'selectorName'  => $grid->id . '-ids',
+                        'gridId'        => $grid->id,
+                        'buttonClass'   => isset($element['buttonClass']) ? $element['buttonClass'] : null,
+                        'buttonOptions' => isset($element['buttonOptions']) ? $element['buttonOptions'] : [],
+                        'items'         => $element['items'],
                     ]);
                 } elseif ($element['buttonType'] === self::BUTTON_TYPE_CUSTOM_JS) {
                     $buttons .= ButtonSingle::widget([
-                        'label'        => $element['label'],
-                        'selectorName' => $grid->id . '-ids',
-                        'gridId'       => $grid->id,
-                        'buttonClass'  => isset($element['buttonClass']) ? $element['buttonClass'] : null,
-                        'customJs'     => $element['customJs'],
+                        'label'         => $element['label'],
+                        'selectorName'  => $grid->id . '-ids',
+                        'gridId'        => $grid->id,
+                        'buttonClass'   => isset($element['buttonClass']) ? $element['buttonClass'] : null,
+                        'buttonOptions' => isset($element['buttonOptions']) ? $element['buttonOptions'] : [],
+                        'customJs'      => $element['customJs'],
                     ]);
                 } else {
                     continue;

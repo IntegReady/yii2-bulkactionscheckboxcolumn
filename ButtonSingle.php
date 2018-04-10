@@ -3,6 +3,7 @@
 namespace integready\bulkactionscheckboxcolumn;
 
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\View;
@@ -30,6 +31,11 @@ class ButtonSingle extends Widget
     public $buttonClass = 'btn';
 
     /**
+     * @var array
+     */
+    public $buttonOptions = [];
+
+    /**
      * @var string
      */
     public $customJs;
@@ -48,11 +54,11 @@ class ButtonSingle extends Widget
      */
     public function run()
     {
-        return Html::button($this->label, [
-            'id' => 'single-' . $this->selectorName,
-            'class' => $this->buttonClass,
+        return Html::button($this->label, ArrayHelper::merge([
+            'id'            => 'single-' . $this->selectorName,
+            'class'         => $this->buttonClass,
             'data-selector' => $this->selectorName,
-        ]);
+        ], $this->buttonOptions));
     }
 
     /**

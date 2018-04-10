@@ -3,6 +3,7 @@
 namespace integready\bulkactionscheckboxcolumn;
 
 use yii\bootstrap\ButtonDropdown as BBDropdown;
+use yii\helpers\ArrayHelper;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -34,6 +35,11 @@ class ButtonDropdown extends Widget
      * @var string
      */
     public $buttonClass = 'btn';
+
+    /**
+     * @var array
+     */
+    public $buttonOptions = [];
 
     /**
      * Items list
@@ -81,9 +87,9 @@ class ButtonDropdown extends Widget
                 'dropdown' => [
                     'items' => $items,
                 ],
-                'options' => [
+                'options'  => ArrayHelper::merge([
                     'class' => $this->buttonClass,
-                ],
+                ], $this->buttonOptions),
             ]);
 
             $field = Html::input('hidden', $this->field, '');
