@@ -71,7 +71,6 @@ use kartik\grid\GridView;
                     'buttonClass'   => 'btn btn-info',
                     'buttonType'    => BulkCheckboxColumn::BUTTON_TYPE_CUSTOM_JS,
                     'customJs'      => 'function(event, gridId, ids) { /* ... */ }',
-                    'buttonClass'   => 'btn btn-primary',
                 ]
                 // ...Other elements
             ],
