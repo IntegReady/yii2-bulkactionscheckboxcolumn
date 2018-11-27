@@ -37,6 +37,7 @@ use kartik\grid\GridView;
     'id'            => 'books-grid',
     'dataProvider'  => $dataProvider,
     'filterModel'   => $searchModel,
+    'layout'        => '{toolbar}\n{summary}\n{items}\n{pager}', // {toolbar} must be included in 'layout' section
     'columns'       => [
         [
             'class'     => BulkCheckboxColumn::className(),
