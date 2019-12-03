@@ -18,6 +18,14 @@ class BulkCheckboxColumn extends CheckboxColumn
     public $elements;
 
     /**
+     * @var array
+     */
+    public $toolbarTemplate = [
+        '{export}',
+        '{toggleData}',
+    ];
+
+    /**
      * @var string
      */
     protected $fieldFilterSelector = '';
@@ -39,7 +47,6 @@ class BulkCheckboxColumn extends CheckboxColumn
                 }
 
                 if (!isset($element['buttonType']) || $element['buttonType'] === self::BUTTON_TYPE_DROPDOWN) {
-
                     $element['field'] = $grid->getId() . '_' . $element['field'];
                     if ($comma) {
                         $this->fieldFilterSelector .= ', input[name=\'' . $element['field'] . '\']';
@@ -72,11 +79,8 @@ class BulkCheckboxColumn extends CheckboxColumn
             }
         }
 
-        $grid->toolbar = [
-            'content' => $buttons,
-            '{export}',
-            '{toggleData}',
-        ];
+        $grid->toolbar = $this->toolbarTemplate;
+        array_unshift($grid->toolbar, $buttons);
 
         if (!empty($this->fieldFilterSelector)) {
             if (!empty($grid->filterSelector)) {

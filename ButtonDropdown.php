@@ -2,9 +2,9 @@
 
 namespace integready\bulkactionscheckboxcolumn;
 
+use yii\base\Widget;
 use yii\bootstrap\ButtonDropdown as BBDropdown;
 use yii\helpers\ArrayHelper;
-use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\View;
@@ -64,6 +64,7 @@ class ButtonDropdown extends Widget
 
     /**
      * @return bool|string
+     * @throws \Exception
      */
     public function run()
     {
